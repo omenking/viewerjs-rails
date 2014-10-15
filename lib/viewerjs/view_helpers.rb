@@ -7,18 +7,18 @@ module Viewerjs
     # zoom_mode: 'page-width' #Possible values are 'auto', 'page-actual', 'page-width', 'page-height', 'page-fit', 'custom'. Default it 'auto'
     # zoom_level: 1.5 #Only applicable if zoom_mode is set to 'custom'. Default zoom_level is 1.0 any value above will increase the zoom or will decrease if its less
     # }
-    def viewerjs_viewer(options = {viewer_alignment: 'right', title: nil})
+    def viewerjs_viewer(file_url = nil, options = {viewer_alignment: 'right', title: nil})
 
       options[:viewer_alignment] = (['right', 'left'].include?(options[:viewer_alignment]) ? options[:viewer_alignment] : 'left')
       _viewer = <<-EOM
               <div dir="#{{'right' => 'rtl', 'left' => 'ltr'}[options[:viewer_alignment]]}">
-                <div id="viewer">
+                <div id="viewer" style="height:#{height}">
                   <div id="titlebar">
                     <div id="documentName"></div>
                     <div id="toolbarRight">
                       <button id="presentation" class="toolbarButton presentation" title="Presentation"></button>
                       <button id="fullscreen" class="toolbarButton fullscreen" title="Fullscreen"></button>
-                      <button id="download" class="toolbarButton download" title="Download"></button>
+                      <!--<button id="download" class="toolbarButton download" title="Download"></button>-->
                     </div>
                   </div>
                   <div id="toolbarContainer">
@@ -79,7 +79,7 @@ module Viewerjs
                   var _document_title = "#{options[:title].blank? ? '' : options[:title]}";
                   var _document_zmode = "#{options[:zoom_mode].blank? ? 'auto' : options[:zoom_mode]}";
                   var _document_zlevel = "#{options[:zoom_level].blank? ? '1.0' : options[:zoom_level]}";
-                  loadDocument(window.location.hash);
+                  loadDocument("#{file_url}");
               </script>
       EOM
       raw(_viewer)
