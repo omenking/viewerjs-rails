@@ -18,7 +18,7 @@ module Viewerjs
                     <div id="toolbarRight">
                       <button id="presentation" class="toolbarButton presentation" title="Presentation"></button>
                       <button id="fullscreen" class="toolbarButton fullscreen" title="Fullscreen"></button>
-                      <!--<button id="download" class="toolbarButton download" title="Download"></button>-->
+                      <button id="download" class="toolbarButton download" title="Download"></button>
                     </div>
                   </div>
                   <div id="toolbarContainer">
